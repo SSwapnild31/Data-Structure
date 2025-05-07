@@ -6,8 +6,10 @@ int main()
 	int op,c;
 	while(1)
 	{
-		printf("1.add_begin 2.add_end 3.add_at_middle 4.print_data \n5.count_nodes 6.save_file 7.read_file 8.reverse_print \n9.print_rec 10.reverse_rec 11.delete_all \n16.exit\n");
-		printf("Enter your choice..\n");
+		printf("-------------------------------------------------------------------\n");
+		printf(" 1.add_begin    2.add_end        3.add_at_middle   4.print_data   \n 5.count_node   6.save_file      7.read_file       8.reverse_print   \n 9.print_rec    10.reverse_rec   11.delete_all     16.exit\n");
+		printf("-------------------------------------------------------------------\n");
+		printf("Enter your choice : ");
 		scanf("%d",&op);
 		switch(op)
 		{
@@ -19,10 +21,11 @@ int main()
 				printf("Total nodes : %d\n",c);	break;
 
 			case 6: save_file(headptr);	break;
-			/*case 7: read_file(&headptr);	break;
+			case 7: read_file(&headptr);	break;
 			case 8: reverse_print(headptr); break;
-			case 9: print_rec(headptr);	break;
-			case 10: reverse_rec(headptr);	break;
+			case 9: printf("----------------------------\n");
+				print_rec(headptr);	break;
+			/*case 10: reverse_rec(headptr);	break;
 		
 			case 11: delete_all(&headptr);	break;
 			case 12: //add_end(&headptr);	break;
@@ -37,6 +40,70 @@ int main()
 	}
 }
 
+void print_rec(SLL *ptr)
+{
+	if(!ptr)
+		return;
+	printf("%d %s %f\n",ptr->rollno,ptr->name,ptr->marks);
+	print_rec(ptr->next);
+}
+
+void reverse_print(SLL *ptr)
+{
+	if(ptr==0)
+	{
+		printf("--------------------------------\n");
+		printf("\033[31mRecords not available..!\033[0m\n");
+		return;
+	}
+	int i,j;
+	
+	SLL *t=ptr;
+	int c = count_node(ptr);
+	printf("--------------------------------\n");
+	for(i=0;i<c;i++)
+	{
+		t=ptr;
+		for(j=0;j<c-1-i;j++)
+			t=t->next;
+		printf("%d %s %f\n",t->rollno,t->name,t->marks);
+	}
+}
+
+void read_file(SLL **ptr)
+{
+	SLL *new,*last;
+	FILE *fp;
+
+	fp=fopen("stud.txt","r");
+
+	if(fp==0)
+	{
+		printf("File not opened..!\n");
+		return;
+	}
+	
+	while(1)
+	{
+		new=malloc(sizeof(SLL));
+	
+		if(fscanf(fp,"%d %s %f",&new->rollno,new->name,&new->marks)==EOF)
+			break;	
+		new->next=0;
+		if(*ptr==0)
+			*ptr=new;
+		else
+		{
+			last=*ptr;
+			while(last->next)
+				last=last->next;
+			last->next=new;
+		}
+	}
+	printf("\033[32mData readed successfully..\033[0m\n");
+	
+}
+
 void save_file(SLL *ptr)
 {
 	FILE *fp=fopen("stud.txt","w");
@@ -49,10 +116,10 @@ void save_file(SLL *ptr)
 
 	while(ptr)
 	{
-		fprintf(fp,"%d %s %f",ptr->rollno,ptr->name,ptr->marks);
+		fprintf(fp,"%d %s %f\n",ptr->rollno,ptr->name,ptr->marks);
 		ptr=ptr->next;
 	}
-	printf("Data saved in file.\n");
+	printf("\033[32mData saved in file.\033[0m\n");
 	fclose(fp);
 }
 
@@ -101,10 +168,11 @@ void add_begin(SLL **ptr)
 
 void print_data(SLL *ptr)
 {
-	printf("\033[34m----------------------------\n");
+	printf("\033[34;94m----------------------------\n");
 	if(ptr==0)
 	{
 		printf("Data not found..!\n");
+		printf("----------------------------\033[0m\n");
 		return;
 	}
 	while(ptr)
