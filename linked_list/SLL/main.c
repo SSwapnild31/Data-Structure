@@ -25,9 +25,9 @@ int main()
 			case 8: reverse_print(headptr); break;
 			case 9: printf("----------------------------\n");
 				print_rec(headptr);	break;
-			/*case 10: reverse_rec(headptr);	break;
-		
-			case 11: delete_all(&headptr);	break;
+			case 10: printf("----------------------------\n");
+				 reverse_rec(headptr);	break;
+			/*case 11: delete_all(&headptr);	break;
 			case 12: //add_end(&headptr);	break;
 			case 13:
 			case 14: //print_data(headptr);	break;
@@ -39,6 +39,17 @@ int main()
 		}
 	}
 }
+
+void reverse_rec(SLL *ptr)
+{
+	if(ptr)
+	{
+		if(ptr->next)
+			reverse_rec(ptr->next);
+		printf("%d %s %f\n",ptr->rollno,ptr->name,ptr->marks);
+	}
+}
+
 
 void print_rec(SLL *ptr)
 {
