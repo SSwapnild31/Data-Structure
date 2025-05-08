@@ -7,7 +7,7 @@ int main()
 	while(1)
 	{
 		printf("-------------------------------------------------------------------\n");
-		printf(" 1.add_begin    2.add_end        3.add_at_middle   4.print_data   \n 5.count_node   6.save_file      7.read_file       8.reverse_print   \n 9.print_rec    10.reverse_rec   11.delete_all     16.exit\n");
+		printf(" 1.add_begin    2.add_end        3.add_at_middle   4.print_data   \n 5.count_node   6.save_file      7.read_file       8.reverse_print   \n 9.print_rec    10.reverse_rec   11.delete_all     12.delete_node \n13.search_node	 14.sort_data	 15.reverse_link   16.exit\n");
 		printf("-------------------------------------------------------------------\n");
 		printf("Enter your choice : ");
 		scanf("%d",&op);
@@ -15,11 +15,10 @@ int main()
 		{
 			case 1: add_begin(&headptr);	break;
 			case 2: add_end(&headptr);	break;
-			case 3:
+			case 3: add_at_middle(&headptr);break;
 			case 4: print_data(headptr);	break;
 			case 5: c=count_node(headptr);	
 				printf("Total nodes : %d\n",c);	break;
-
 			case 6: save_file(headptr);	break;
 			case 7: read_file(&headptr);	break;
 			case 8: reverse_print(headptr); break;
@@ -27,17 +26,84 @@ int main()
 				print_rec(headptr);	break;
 			case 10: printf("----------------------------\n");
 				 reverse_rec(headptr);	break;
-			/*case 11: delete_all(&headptr);	break;
-			case 12: //add_end(&headptr);	break;
-			case 13:
-			case 14: //print_data(headptr);	break;
-			case 15: //print_data(headptr);	break;*/
+			case 11: delete_all(&headptr);	break;
+			case 12: //delete_node();	break;
+			case 13: search_node(headptr);  break;
+			case 14: //sort_data(headptr);	break;
+			case 15: //reverse_link(&headptr);	break;
 			case 16: exit(0);
 			default : printf("Invalid option..\n");
 	
 			return 0;
 		}
 	}
+}
+void add_at_middle(SLL **ptr)
+{
+	SLL *new,*last;
+	new=malloc(sizeof(SLL));
+	printf("Enter rollno, name & marks\n");
+	scanf("%d %s %f",&new->rollno,new->name,&new->marks);
+
+	if(*ptr==0 || (new->rollno < (*ptr)->rollno))
+	{
+		new->next=*ptr;
+		*ptr=new;
+	}
+	else
+	{
+		last=*ptr;
+		while(last->next!=0 && (new->rollno > last->next->rollno))
+		{
+			last=last->next;
+		}
+		new->next=last->next;
+		last->next=new;
+		printf("\033[32;92mData inserted..\033[0m\n");
+	}
+}
+
+void search_node(SLL *ptr)
+{
+	int srollno;
+	printf("Enter rollno to search : ");
+	scanf("%d",&srollno);
+	
+	if(ptr==0)
+	{
+		printf("Data not present..!\n");
+		return;
+	}
+	while(ptr)
+	{
+		if(srollno==ptr->rollno)
+		{
+			printf("\033[32;92m%d %s %f\033[0m\n",ptr->rollno,ptr->name,ptr->marks);
+			return;
+		}
+		ptr=ptr->next;
+	}
+	printf("rollno not present..!\n");
+}
+
+
+void delete_all(SLL **ptr)
+{
+	if(*ptr==0)
+	{
+		printf("\033[31;91mData not present..!\033[0m\n");
+		return;
+	}
+	
+	SLL *temp=*ptr;
+	
+	while(temp)
+	{
+		*ptr=temp->next;
+		free(temp);
+		temp=*ptr;
+	}
+	printf("\033[31;91mData deleted successfully..\033[0m\n");
 }
 
 void reverse_rec(SLL *ptr)
