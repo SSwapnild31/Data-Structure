@@ -23,3 +23,6 @@ void print_rec(SLL *);
 
 void reverse_rec(SLL *);
 void delete_all(SLL **);
+void add_at_middle(SLL **);
+void search_node(SLL *);
+void delete_node(SLL **);
