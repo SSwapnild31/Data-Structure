@@ -27,7 +27,7 @@ int main()
 			case 10: printf("----------------------------\n");
 				 reverse_rec(headptr);	break;
 			case 11: delete_all(&headptr);	break;
-			case 12: //delete_node();	break;
+			case 12: delete_node(&headptr);	break;
 			case 13: search_node(headptr);  break;
 			case 14: //sort_data(headptr);	break;
 			case 15: //reverse_link(&headptr);	break;
@@ -38,6 +38,38 @@ int main()
 		}
 	}
 }
+
+void delete_node(SLL **ptr)
+{
+	int rno;
+	printf("Enter rollno to delete node : ");
+	scanf("%d",&rno);
+	
+	if(*ptr==0)
+	{
+		printf("No data found..!\n");
+		return;
+	}
+	
+	SLL *del ,*temp;
+
+	if((*ptr)->rollno==rno)
+	{
+		del=*ptr;
+		*ptr=(*ptr)->next;
+		free(del);
+	}
+	else
+	{
+		del=*ptr;
+		while(del->next->rollno!=rno)
+			del=del->next;
+		temp=del->next;
+		del->next=del->next->next;
+		free(temp);
+	}
+}
+
 void add_at_middle(SLL **ptr)
 {
 	SLL *new,*last;
