@@ -16,6 +16,8 @@ void save_file(sll*);
 void read_file(sll**);
 void rev_print(sll*);
 void recu_print(sll*);
+void add_middle(sll**);
+void rev_link(sll**);
 
 void main()
 {
@@ -24,7 +26,7 @@ void main()
 	while(1)
 	{
 		int ch;
-		printf("1.add_beg 2.add_end 3.print 4.count_node 5.save_file 6.read_file 7.recu_print 8.rev_print 16.exit\n");
+		printf("1.add_beg 2.add_end 3.print 4.count_node 5.save_file 6.read_file 7.recu_print 8.rev_print 9.add_middle 10.rev_link 16.exit\n");
 		scanf("%d",&ch);
 		switch(ch)
 		{
@@ -37,11 +39,57 @@ void main()
 			case 6 : read_file(&head);	break;
 			case 7 : recu_print(head);	break;
 			case 8 : rev_print(head);	break;
+			case 9 : add_middle(&head);	break;
+			case 10 : rev_link(&head);	break;
 			case 16 : exit(0);
 			default: printf("wrong input.!\n");
 		}
 	}
 }
+
+void rev_link(sll **head)
+{
+	int c = count_node(*head);
+	sll **arr, *temp = *head;
+	arr = malloc(sizeof(sll*)*c);
+	
+	int i = 0;
+	while(temp)
+	{
+		arr[i++] = temp;
+		temp = temp -> next;
+	}
+	
+	for(i=1;i<c;i++)
+		arr[i]->next = arr[i-1];
+	arr[0]->next = 0;
+	*head = arr[c-1]; 
+}
+
+void add_middle(sll **head)
+{
+	sll *new = malloc(sizeof(sll));
+	printf("Enter rollno & name\n");
+	scanf("%d %s",&new->rollno,new->name);
+	new -> next = 0;
+	if(*head==0 || (*head)->rollno > new->rollno)
+	{
+		new->next = *head;
+		*head = new;
+	}
+	else
+	{
+		sll *temp = *head;
+		
+		while((temp->next) && (temp->next->rollno < new->rollno))
+			temp = temp -> next;
+		new -> next = temp -> next;
+		temp -> next = new;
+	}
+}
+
+
+
 
 void recu_print(sll *head)
 {
