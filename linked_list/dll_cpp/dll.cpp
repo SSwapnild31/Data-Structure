@@ -1,5 +1,5 @@
 #include"header.h"
-
+#include<fstream>
 int main()
 {
 	dll obj;
@@ -15,13 +15,59 @@ int main()
 			case 3  : obj.print_node();	break;
 			case 4  : c = obj.count_node();
 				  cout <<"total nodes are "<< c << endl;	break;
-			//case 5  : obj.write_file();	break
-			//case 6  : obj.read_file();	break;
+			case 5  : obj.write_file();	break;
+			case 6  : obj.read_file();	break;
 			case 16 : exit(0);
 			default : cout <<"wrong oprion..!"<< endl;
 		}
 	}
 	return 0;
+}
+
+void dll::read_file()
+{
+	ifstream fin("data");
+	if(!fin)
+	{
+		cout <<"file not found..!"<< endl;
+		return ;
+	}
+	
+	while(1)
+	{
+		if(fin.tellg()==-1)
+			break;
+		student *node = new student;
+		fin >> node->rollno >> node->name >> node->marks;
+		if(head==0)
+			head = node;
+		else
+		{
+			student *temp = head;
+			while(temp->next)
+				temp = temp -> next;
+			temp -> next = node;
+			node -> prev = temp;
+		}
+	}
+	cout <<"Data reading successful.."<< endl;
+}
+
+void dll::write_file()
+{
+	student *temp=head;
+	ofstream fout("data");
+	if(!fout)
+	{
+		cout <<"file not found..!"<< endl;
+		return ;
+	}
+	while(temp)
+	{
+		fout << temp->rollno <<" "<< temp->name <<" "<< temp->marks << endl;
+		temp = temp -> next;
+	}
+	cout <<"Data stored into file."<< endl;
 }
 
 int dll::count_node()

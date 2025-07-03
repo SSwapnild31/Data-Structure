@@ -33,4 +33,6 @@ public :
 	void add_end();
 	void print_node();
 	int count_node();
+	void write_file();
+	void read_file();
 };
