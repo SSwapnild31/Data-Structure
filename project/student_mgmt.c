@@ -55,14 +55,38 @@ void main()
 
 void delete_student(std **head)
 {
-	if(head==0)
+	printf("---------------------------------------\n");
+	if(*head==0)
 	{
-		printf("\033[32;92mFile not opened..!\033[0m\n");
+		printf("\033[31;91mStudents are not present..!\033[0m\n");
 		return ;
 	}
-	
-	
-	
+
+	int roll_no;
+	printf("Enter rollno ro delete : ");
+	scanf("%d",&roll_no);
+
+	std *del,*last;
+
+	if((*head)->rollno == roll_no)
+	{
+		del = *head;
+		if((*head)->next)
+			*head = (*head)->next;
+		else
+			*head = 0;
+	}
+	else
+	{
+		last = *head;
+		while(last->next && (last->next->rollno)!=roll_no)
+			last = last -> next;
+		del = last -> next;
+		last -> next = last -> next -> next;
+	}
+	free(del);
+	del = 0;
+	printf("\033[32;92rollno %d data deleted successfully.\033[0m\n",roll_no);
 }
 
 void read_file(std **head)
