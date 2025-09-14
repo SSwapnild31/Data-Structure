@@ -29,13 +29,36 @@ int main()
 		{
 			case 1  : add_begin(&head);	break;
 			case 2  : add_end(&head);	break;
-			//case 3  : add_middle(&head);	break;
+			case 3  : add_middle(&head);	break;
 			case 4  : display(head);	break;
 			case 10 : exit(0);
 			default : printf("wrong option.!!\n");
 		}
 	}
 	return 0;
+}
+
+void add_middle(sll **ptr)
+{
+	sll *new = malloc(sizeof(sll));
+	
+	printf("Enter rollno, name & marks\n");
+	scanf("%d%s%f",&new->rollno,new->name,&new->marks);
+	
+	if(*ptr==0 || new->rollno<(*ptr)->rollno)
+	{
+		new->next = *ptr;
+		*ptr = new;
+	}
+	else
+	{
+		sll *temp = *ptr;
+		while(temp->next && new->rollno>temp->next->rollno)
+			temp = temp->next;
+
+		new->next = temp->next;
+		temp->next = new;
+	}
 }
 
 void add_end(sll **ptr)
