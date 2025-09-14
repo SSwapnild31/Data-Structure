@@ -14,14 +14,15 @@ void add_begin(sll**);
 void add_end(sll**);
 void add_middle(sll**);
 void display(sll*);
+int count_node(sll*);
 
 int main()
 {
-	int ch;
+	int ch,c;
 	sll *head = 0;
 	while(1)
 	{
-		printf("1.add_begin 2.add_end 3.add_middle 4.display 10.exit\n");
+		printf("1.add_begin 2.add_end 3.add_middle 4.display \n5.count_node 10.exit\n");
 		printf("Enter option : ");
 		scanf("%d",&ch);
 
@@ -31,11 +32,30 @@ int main()
 			case 2  : add_end(&head);	break;
 			case 3  : add_middle(&head);	break;
 			case 4  : display(head);	break;
+			case 5  : c = count_node(head);	
+				  printf("Node count : %d\n",c);	break;
 			case 10 : exit(0);
 			default : printf("wrong option.!!\n");
 		}
 	}
 	return 0;
+}
+
+int count_node(sll *ptr)
+{
+	if(ptr==0)
+	{
+		printf("Empty list.!!\n");
+		return 0;
+	}
+
+	int count = 0;
+	while(ptr)
+	{
+		count++;
+		ptr = ptr->next;
+	}
+	return count;
 }
 
 void add_middle(sll **ptr)
