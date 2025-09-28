@@ -10,8 +10,8 @@ typedef struct st
 
 void add_at_end(node**);
 int count_node(node*);
-void rev_print_upto_middle(node*);
-
+void rev_print_upto_half(node*);
+void print_nodes(node*);
 
 int main()
 {
@@ -20,7 +20,7 @@ int main()
 	
 	while(1)
 	{
-		printf("\t1.add_at_end \n\t2.count_node \n\t3.rev_print_upto_middle \n\t4.exit\n");
+		printf("\t1.add_at_end \n\t2.count_node \n\t3.rev_print_upto_half \n\t4.print_nodes \n\t5.exit\n");
 		printf("Enter option : ");
 		scanf("%d",&op);
 		switch(op)
@@ -30,14 +30,43 @@ int main()
 			case 2 : c = count_node(head);
 				 printf("Total node : %d\n",c);
 				 break;
-			case 3 : rev_print_upto_middle(head);
+			case 3 : rev_print_upto_half(head);
 				 break;
-			case 4 : exit(0);
+			case 4 : print_nodes(head);
+				 break;
+			case 5 : exit(0);
 			default : printf("wrong option\n");
 		}
 	}
 	
 	return 0;
+}
+
+void print_nodes(node *head)
+{
+	if(head==0)
+	{
+		printf("List is empty\n");
+		return ;
+	}
+	
+	printf("forward printing\n");
+	while(head)
+	{		
+		printf("%d ",head->data);
+		if(head->next==0)
+			break;
+		head = head->next;
+	}
+	printf("\n");
+
+	printf("backward printing\n");
+	while(head)
+	{
+		printf("%d ",head->data);
+		head = head->prev;
+	}
+	printf("\n");
 }
 
 void add_at_end(node **head)
@@ -63,7 +92,7 @@ void add_at_end(node **head)
 	}
 }
 
-void rev_print_upto_middle(node *head)
+void rev_print_upto_half(node *head)
 {
 	if(head==0)
 	{
@@ -75,7 +104,7 @@ void rev_print_upto_middle(node *head)
 	
 	int n = count_node(head)/2;
 	
-	while(head && i<n)
+	while(head && i<n-1)
 	{
 		i++;
 		head = head->next;
