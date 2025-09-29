@@ -11,8 +11,7 @@ void add_begin(scll**);
 void add_end(scll**);
 void display(scll*);
 int count_node(scll*);
-
-//void add_middle(sll**);
+void add_middle(scll**);
 
 int main()
 {
@@ -28,7 +27,7 @@ int main()
 		{
 			case 1  : add_begin(&head);	break;
 			case 2  : add_end(&head);	break;
-			//case 3  : add_middle(&head);	break;
+			case 3  : add_middle(&head);	break;
 			case 4  : display(head);	break;
 			case 5  : c = count_node(head);	
 				  c > 0 ? printf("Node count : %d\n",c) : 0 ; break;	
@@ -102,30 +101,32 @@ int count_node(scll *head)
 	return count;
 }
 
-/*
-void add_middle(sll **ptr)
+void add_middle(scll **ptr)
 {
-	sll *new = malloc(sizeof(sll));
+	scll *new = malloc(sizeof(scll));
 	
 	printf("Enter data : ");
 	scanf("%d",&new->data);
+	new->data = 0;
 	
-	if(*ptr==0 || new->data<(*ptr)->data)
+	if(*ptr==0 || new->data < (*ptr)->data)
 	{
-		new->next = *ptr;
 		*ptr = new;
+		new->next = *ptr;
 	}
 	else
 	{
-		sll *temp = *ptr;
-		while(temp->next && new->data > temp->next->data)
+		scll *temp = *ptr;
+		while(temp->next!=*ptr && new->data > temp->next->data)
 			temp = temp->next;
 
-		new->next = temp->next;
-		temp->next = new;
+		if(temp->next==*ptr)
+		{
+			new->next = temp->next;
+			temp->next = new;
+		}
 	}
 }
-*/
 
 void add_end(scll **ptr)
 {
