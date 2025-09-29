@@ -46,15 +46,21 @@ void add_begin(scll **ptr)
 	
 	printf("Enter int data : ");
 	scanf("%d",&new->data);
+	new->next = 0;
 	
-	new->next = *ptr;
-	
-	if(*ptr==0)	{ 
+	if(*ptr==0)	
+	{ 
 		*ptr = new;
-	}
-	else	{
 		new->next = *ptr;
+	}
+	else
+	{
+		new->next = *ptr;
+		scll *temp =*ptr;
+		while(temp->next!=*ptr)
+			temp = temp->next; 
 		*ptr = new;
+		temp->next = *ptr;
 	}
 }
 
@@ -121,22 +127,26 @@ void add_middle(sll **ptr)
 }
 */
 
-void add_end(scll **head)
+void add_end(scll **ptr)
 {
-	scll *ptr=*head, *new = malloc(sizeof(scll));
+	scll *new = malloc(sizeof(scll));
 	
 	printf("Enter int data : ");
 	scanf("%d",&new->data);
+	new->next = 0;
 	
-	new->next = ptr;
-	
-	if(ptr==0)	{
-		ptr = new;
+	if(*ptr==0)
+	{
+		*ptr = new;
+		new->next = *ptr;
 	}
-	else	{
-		scll *last=ptr;
-		while(last->next!=*head)
+	else
+	{
+		scll *last = *ptr;
+		while(last->next!=*ptr)	
 			last = last->next;
+
+		new->next = last->next;
 		last->next = new;
 	}
 }
