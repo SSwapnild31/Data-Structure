@@ -109,3 +109,25 @@ int count_node(dcll *head)
 	return count;
 }
 
+void add_end(dcll **ptr)
+{
+        dcll *new = malloc(sizeof(dcll));
+
+        printf("Enter int data : ");
+        scanf("%d",&new->data);
+
+        if(*ptr==0)
+        {
+                *ptr = new;
+                new->next = new->prev = *ptr;
+        }
+        else
+        {
+                dcll *last = (*ptr)->prev;
+
+                new->prev = last;
+                new->next = *ptr;
+                last->next = new;
+                (*ptr)->prev = new;
+        }
+}
