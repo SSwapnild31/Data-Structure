@@ -23,6 +23,17 @@ void enqueue(int *a)
 	printf("%d inserted into queue\n",num);
 }
 
+void dequeue(int *a)
+{
+          if(front==-1 || front > rear)
+          {
+                  printf("queue is empty(underflow)\n");
+                  return ;
+          }
+ 
+          printf("%d deleted from queue\n",a[front]);
+          front++;
+}
 
 void display(int *a)
 {
