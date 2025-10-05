@@ -86,3 +86,32 @@ void insert(bst **root, int num)
 		printf("Duplicate number\n");
 }
 
+void inorder(bst *root)
+{
+	if(root!=0)
+	{
+		inorder(root->left);
+		printf("%d ",root->data);
+		inorder(root->right);
+	}
+}
+
+void preorder(bst *root)
+{
+	if(root!=0)
+	{
+		printf("%d ",root->data);
+		preorder(root->left);
+		preorder(root->right);
+	}
+}
+
+void postorder(bst *root)
+{
+	if(root!=0)
+	{
+		postorder(root->left);
+		postorder(root->right);
+		printf("%d ",root->data);
+	}
+}
