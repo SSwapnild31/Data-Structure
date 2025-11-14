@@ -36,8 +36,8 @@ int main()
 			case 2 : inorder(root);		break; 
 			case 3 : preorder(root);	break;
 			case 4 : postorder(root);	break;
-			case 5 : 
-			case 6 : 
+			case 5 : search();			break;
+			case 6 : delete();			break;
 			case 7 : exit(0);
 			default :printf("unknown option..!\n");
 		}
