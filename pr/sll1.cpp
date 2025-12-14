@@ -27,8 +27,22 @@ void sll::add_begin(shared_ptr<sll> &ptr)
 
 void sll::add_end(shared_ptr<sll> &ptr)
 {
+	shared_ptr<sll> newnode = make_shared<sll>();
+	cout <<"Enter rollno, name and marks" << endl;
+	cin >> newnode->roll >> newnode->name >> newnode->marks;
+	newnode->next = nullptr;
 	
+	if(ptr == nullptr)
+	{
+		ptr = newnode;
+		return ;
+	}
+
+	shared_ptr<sll> last = ptr;
+	while(last->next)
+		last = last -> next;
 	
+	last -> next = newnode;
 }
 
 void sll::display(shared_ptr<sll> ptr)
