@@ -47,14 +47,36 @@ void display(sll *ptr){
 	printf("\n");
 }
 
+int getData(){
+	int num;
+	printf("Enter int to insert : ");
+	scanf("%d",&num);
+	return num;
+}
 
 int main()
 {
 	sll *head = NULL;
-	addAtEnd(&head, 10);
-	addAtEnd(&head, 20);
-	display(head);
-	addAtBegin(&head, 5);
-	display(head);
+	while(true)
+	{
+		int op, num;
+		printf("1.addBegin \t2.addEnd\n3.display\n");
+		printf("Enter option : ");
+		scanf("%d",&op);
+
+		switch(op)
+		{
+			case 1 : addAtBegin(&head, getData()); 
+				 break;
+			case 2 : addAtEnd(&head, getData());   
+				 break;
+			case 3 : display(head);		       
+				 break;
+			case 4 : c = countNode(head);
+				 printf("node count : %d",c);
+				 break;
+			case 5 : exit(0);
+		}
+	}
 	return 0;
 }
