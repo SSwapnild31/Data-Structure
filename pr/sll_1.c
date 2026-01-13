@@ -6,6 +6,22 @@ typedef struct node
 	struct node *next;
 }sll;
 
+void addAtBegin(sll **ptr, int key)
+{
+	sll *new = malloc(sizeof(sll));
+	new->data = key;
+	new->next = NULL;
+
+	if(*ptr == NULL){
+		*ptr = new;
+		return ;
+	}
+
+	new->next = *ptr;
+	*ptr = new;
+}
+
+
 void addAtEnd(sll **ptr, int key)
 {
 	sll *new = malloc(sizeof(sll));
@@ -37,6 +53,8 @@ int main()
 	sll *head = NULL;
 	addAtEnd(&head, 10);
 	addAtEnd(&head, 20);
+	display(head);
+	addAtBegin(&head, 5);
 	display(head);
 	return 0;
 }
