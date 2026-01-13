@@ -1,5 +1,5 @@
 #include<stdio.h>
-
+#include<stdlib.h>
 typedef struct node
 {
 	int data;
@@ -23,10 +23,20 @@ void addAtEnd(sll **ptr, int key)
 	}
 }
 
+void display(sll *ptr){
+	while(ptr){
+		printf("%d ",ptr->data);
+		ptr = ptr->next;
+	}
+	printf("\n");
+}
+
+
 int main()
 {
 	sll *head = NULL;
 	addAtEnd(&head, 10);
-	
+	addAtEnd(&head, 20);
+	display(head);
 	return 0;
 }
