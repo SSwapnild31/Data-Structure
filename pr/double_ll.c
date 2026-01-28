@@ -21,6 +21,27 @@ void addBegin(dll **ptr, int num){
 	*ptr = newNode;
 }
 
+void addEnd(dll **ptr, int num){
+	dll *newNode = malloc(sizeof(dll));
+	
+	newNode->data = num;
+	newNode->next = NULL;
+
+	if(*ptr == NULL){
+		newNode->prev = NULL;
+		*ptr = newNode;
+		return;
+	}
+	
+	dll *temp = *ptr;
+	while(temp->next){
+		temp = temp->next;
+	}
+
+	temp->next = newNode;
+	newNode->prev = temp;
+
+}
 
 void display(dll *ptr){
 	if(ptr == NULL){
