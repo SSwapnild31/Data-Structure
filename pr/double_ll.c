@@ -54,6 +54,7 @@ void display(dll *ptr){
 	}
 	printf("\n");
 }
+
 int countNode(dll *ptr){
 	int c = 0;
 	while(ptr){
@@ -63,12 +64,29 @@ int countNode(dll *ptr){
 	return c;
 }
 
+void reversePrint(dll *ptr){
+	if(!ptr){
+		printf("Empty list!\n");
+		return;
+	}
+	
+	while(ptr->next){
+		ptr = ptr->next;
+	}
+
+	while(ptr){
+		printf("%d <- ",ptr->data);
+		ptr = ptr->prev;
+	}
+	printf("\n");
+}
+
 int main()
 {
 	dll *head = 0;
 	while(1){
 		int op, num, c;
-		printf("1.addBegin\t2.addEnd\n3.display\t4.countNodes\n5.exit\n");
+		printf("1.addBegin\t2.addEnd\n3.display\t4.countNodes\n5.reversePrint\t6.exit\n");
 		printf("Enter option : ");
 		scanf("%d",&op);
 		switch(op){
@@ -76,7 +94,8 @@ int main()
 			case 2 : printf("Enter number : "); scanf("%d",&num); addEnd(&head, num);	break;
 			case 3 : display(head);		break;
 			case 4 : c = countNode(head); printf("Total nodes : %d\n",c);		break;
-			case 5 : exit(0);
+			case 5 : reversePrint(head);	break;
+			case 6 : exit(0);
 			default: printf("wrong option! Try again!\n");
 		}
 	}
