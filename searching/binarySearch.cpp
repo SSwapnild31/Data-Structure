@@ -40,5 +40,7 @@ int main()
 	
 	int res = binarySearch(a,n,key);
 	
+	res>=0 ? cout <<"Element is present at index : "<< res << endl : cout <<"Element is not present"<< endl;
+
 	return 0;
 }
