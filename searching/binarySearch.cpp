@@ -1,7 +1,26 @@
 #include<iostream>
+#include<algorithm>
 using namespace std;
 
 int binarySearch(int a[], int n, int key){
+	
+	sort(a,a+n);
+
+	int low = 0;
+	int high = n - 1;
+	while(low <= high){
+		int mid = low + (high - low)/2;
+		
+		if(a[mid] == key) {
+			return mid;
+		} 
+		else if(key > a[mid]) {
+			low = mid + 1;
+		} 
+		else {
+			high = mid - 1;
+		}
+	}
 	
 	return -1;
 }
@@ -21,6 +40,5 @@ int main()
 	
 	int res = binarySearch(a,n,key);
 	
-
 	return 0;
 }
