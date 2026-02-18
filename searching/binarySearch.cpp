@@ -4,7 +4,7 @@ using namespace std;
 
 int binarySearch(int a[], int n, int key){
 	
-	sort(a,a+n);
+	//sort(a,a+n);
 
 	int low = 0;
 	int high = n - 1;
@@ -30,7 +30,8 @@ int main()
 	int a[5], key;
 	int n = sizeof(a)/sizeof(a[0]);
 	
-	cout <<"Enter arr ele's"<< endl;
+	cout <<"Elements must be sorted\n";
+	cout <<"Enter arr ele's\n";
 	for(int i=0;i<n;i++){
 		cin >> a[i];
 	}
