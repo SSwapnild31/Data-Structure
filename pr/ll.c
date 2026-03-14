@@ -11,13 +11,15 @@ void addBegin(sll**);
 void addEnd(sll**);
 void display(sll*);
 int nodeCount(sll*);
+void reversePrint(sll*);
+void reverseList(sll**);
 
 int main()
 {
 	sll *head = 0;
 	int c, op;
 	while(1){
-		printf("1.addBegin\t2.addEnd\n3.display\t4.nodeCount\n5.exit\n");
+		printf("1.addBegin\t2.addEnd\n3.display\t4.nodeCount\n5.revPrint\t6.revList\n7.exit\n");
 		printf("Enter option : ");
 		scanf("%d",&op);
 
@@ -27,14 +29,40 @@ int main()
 			case 3 : display(head);		break;
 			case 4 : c = nodeCount(head);	
 				 printf("Total nodes : %d\n",c);break;
-			case 5 : exit(0);
+			case 5 : reversePrint(head);	
+				 printf("\n");		break;
+			case 6 : reverseList(&head);	break;
+			case 7 : exit(0);
 			default: printf("oops! wrong option!\n");
 		}
 	}
 }
 
-void addBegin(sll**){
+void reverseList(sll** head){
 	
+}
+
+void reversePrint(sll* head){
+	if(head == 0)	return;
+	
+	reversePrint(head->next);
+	printf("%d <- ",head->data);
+}
+
+void addBegin(sll** head){
+	sll *new = malloc(sizeof(sll));
+	
+	printf("Enter data : ");
+	scanf("%d",&new->data);
+	new->next = 0;
+	
+	if(*head == 0){
+		*head = new;
+		return;
+	}
+	
+	new -> next = *head;
+	*head = new;
 }
 
 void addEnd(sll** head){
@@ -46,13 +74,13 @@ void addEnd(sll** head){
 	
 	if(*head == 0){
 		*head = new;
+		return;
 	}
-	else{
-		sll *last = *head;
-		while(last->next)
-			last = last -> next;
-		last -> next = new;
-	}
+
+	sll *last = *head;
+	while(last->next)
+		last = last -> next;
+	last -> next = new;
 }
 
 void display(sll* head){
