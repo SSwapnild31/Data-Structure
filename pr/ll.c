@@ -40,6 +40,22 @@ int main()
 
 void reverseList(sll** head){
 	
+	if(*head == 0) {
+		printf("Empty list!\n");
+		return;
+	}
+	
+	sll *curr = *head, *prev = NULL, *nxt = NULL;
+	while(curr){
+		nxt = curr -> next;
+		curr -> next = prev;
+
+		prev = curr;
+		curr = nxt;
+	}
+	*head = prev;
+
+	printf("List reversed!\n");
 }
 
 void reversePrint(sll* head){
